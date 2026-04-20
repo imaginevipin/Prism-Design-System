@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; background: #fff; padding: 20px 24px; }
+  .row { display: flex; gap: 24px; align-items: flex-start; }
+  .logo-cell { display: flex; flex-direction: column; gap: 8px; }
+  .logo-bg { border-radius: 5px; padding: 16px 20px; display: flex; align-items: center; justify-content: center; }
+  .logo-bg img { max-height: 36px; max-width: 180px; object-fit: contain; }
+  .label { font-size: 10px; color: #686868; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="logo-cell">
+      <div class="logo-bg" style="background:#171717">
+        <img src="../assets/logo-horizontal-dark.png" alt="Horizontal Dark">
+      </div>
+      <div class="label">Horizontal · Dark — on dark bg</div>
+    </div>
+    <div class="logo-cell">
+      <div class="logo-bg" style="background:#ffffff;border:1px solid #e1e1e1">
+        <img src="../assets/logo-horizontal-light.png" alt="Horizontal Light">
+      </div>
+      <div class="label">Horizontal · Light — on light bg</div>
+    </div>
+    <div class="logo-cell">
+      <div class="logo-bg" style="background:#ffffff;border:1px solid #e1e1e1">
+        <img src="../assets/logo-vertical-dark.png" alt="Vertical Dark">
+      </div>
+      <div class="label">Vertical · Dark</div>
+    </div>
+    <div class="logo-cell">
+      <div class="logo-bg" style="background:#171717">
+        <img src="../assets/logo-vertical-light.png" alt="Vertical Light">
+      </div>
+      <div class="label">Vertical · Light</div>
+    </div>
+    <div class="logo-cell">
+      <div class="logo-bg" style="background:#f7f7f7;border:1px solid #e1e1e1">
+        <img src="../assets/logo-mark.png" alt="Logo Mark">
+      </div>
+      <div class="label">Mark</div>
+    </div>
+  </div>
+</body>
+</html>

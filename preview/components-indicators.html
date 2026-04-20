@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Regular.otf") format("opentype"); font-weight: 400; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PP Neue Montreal", sans-serif; background: #fff; padding: 20px 24px; }
+  .section { margin-bottom: 18px; }
+  .section-label { font-size: 10px; font-weight: 600; color: #686868; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+  /* Badges / chips */
+  .badge { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 4px; font-size: 11px; font-weight: 500; letter-spacing: 0.01em; }
+  .badge-primary { background: #fdf1eb; color: #ec4e0b; }
+  .badge-dark { background: #363636; color: #fff; }
+  .badge-success { background: #e6faf0; color: #008e3b; }
+  .badge-alert { background: #ffe5e4; color: #c62828; }
+  .badge-warning { background: #fff9e0; color: #8a6200; }
+  .badge-neutral { background: #f7f7f7; color: #686868; }
+
+  /* Toggle */
+  .toggle-wrap { display: flex; align-items: center; gap: 8px; }
+  .toggle { width: 40px; height: 22px; border-radius: 11px; position: relative; cursor: pointer; transition: background 0.2s; }
+  .toggle.on { background: #ec4e0b; }
+  .toggle.off { background: #d9d9d9; }
+  .toggle-thumb { width: 16px; height: 16px; border-radius: 50%; background: #fff; position: absolute; top: 3px; transition: left 0.2s; }
+  .toggle.on .toggle-thumb { left: 21px; }
+  .toggle.off .toggle-thumb { left: 3px; }
+  .toggle-label { font-size: 13px; color: #363636; }
+
+  /* Checkbox */
+  .checkbox { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid #d9d9d9; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .checkbox.checked { background: #ec4e0b; border-color: #ec4e0b; }
+  .checkbox.checked::after { content: ''; width: 10px; height: 6px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translateY(-1px); display: block; }
+
+  /* Radio */
+  .radio { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #d9d9d9; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .radio.checked { border-color: #ec4e0b; }
+  .radio.checked::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #ec4e0b; display: block; }
+
+  /* Status dots */
+  .status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #363636; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* Progress */
+  .progress-bar { width: 160px; height: 4px; background: #f0f0f0; border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 2px; background: #ec4e0b; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="section-label">Badges</div>
+    <div class="row">
+      <span class="badge badge-primary">Primary</span>
+      <span class="badge badge-dark">Dark</span>
+      <span class="badge badge-success">Success</span>
+      <span class="badge badge-alert">Alert</span>
+      <span class="badge badge-warning">Warning</span>
+      <span class="badge badge-neutral">Neutral</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Controls</div>
+    <div class="row">
+      <div class="toggle-wrap"><div class="toggle on"><div class="toggle-thumb"></div></div><span class="toggle-label">On</span></div>
+      <div class="toggle-wrap"><div class="toggle off"><div class="toggle-thumb"></div></div><span class="toggle-label">Off</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><div class="checkbox checked"></div><span style="font-size:13px;color:#363636">Checked</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><div class="checkbox"></div><span style="font-size:13px;color:#363636">Unchecked</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><div class="radio checked"></div><span style="font-size:13px;color:#363636">Selected</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><div class="radio"></div><span style="font-size:13px;color:#363636">Unselected</span></div>
+    </div>
+  </div>
+  <div class="section" style="margin-bottom:0">
+    <div class="section-label">Status &amp; Progress</div>
+    <div class="row">
+      <div class="status"><div class="dot" style="background:#00c853"></div>Active</div>
+      <div class="status"><div class="dot" style="background:#f44336"></div>Error</div>
+      <div class="status"><div class="dot" style="background:#ffc800"></div>Pending</div>
+      <div class="status"><div class="dot" style="background:#d9d9d9"></div>Inactive</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
+        <span style="font-size:11px;color:#686868">65%</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

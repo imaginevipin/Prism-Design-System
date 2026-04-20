@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PP Neue Montreal", sans-serif; background: #fff; padding: 20px 24px; }
+  .scale { display: flex; gap: 6px; }
+  .swatch { flex: 1; height: 48px; border-radius: 4px; position: relative; }
+  .row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+  .label { font-size: 11px; font-weight: 500; color: #363636; min-width: 90px; }
+  .hex { font-size: 11px; color: #686868; }
+  .scale-row { display: flex; flex-direction: column; gap: 0; }
+  .chip { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+  .chip-sq { width: 32px; height: 20px; border-radius: 3px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+  <div class="scale">
+    <div class="swatch" style="background:#f9c8b3;" title="100"></div>
+    <div class="swatch" style="background:#f6ae8f;" title="200"></div>
+    <div class="swatch" style="background:#f2885c;" title="300"></div>
+    <div class="swatch" style="background:#f0713c;" title="400"></div>
+    <div class="swatch" style="background:#ec4e0b; outline: 2px solid #363636; outline-offset: 2px;" title="500 ★"></div>
+    <div class="swatch" style="background:#d7470a;" title="600"></div>
+    <div class="swatch" style="background:#a83708;" title="700"></div>
+    <div class="swatch" style="background:#822b06;" title="800"></div>
+    <div class="swatch" style="background:#632105;" title="900"></div>
+  </div>
+  <div style="display:flex; gap: 24px; margin-top: 10px; flex-wrap: wrap;">
+    <div class="chip"><div class="chip-sq" style="background:#f9c8b3;border:1px solid #e1e1e1"></div><span style="font-size:11px;color:#363636">100 · #f9c8b3</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#f6ae8f;border:1px solid #e1e1e1"></div><span style="font-size:11px;color:#363636">200 · #f6ae8f</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#f2885c;"></div><span style="font-size:11px;color:#363636">300 · #f2885c</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#f0713c;"></div><span style="font-size:11px;color:#363636">400 · #f0713c</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#ec4e0b;"></div><span style="font-size:11px;color:#363636;font-weight:600">500 · #ec4e0b ★</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#d7470a;"></div><span style="font-size:11px;color:#363636">600 · #d7470a</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#a83708;"></div><span style="font-size:11px;color:#363636">700 · #a83708</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#822b06;"></div><span style="font-size:11px;color:#363636">800 · #822b06</span></div>
+    <div class="chip"><div class="chip-sq" style="background:#632105;"></div><span style="font-size:11px;color:#363636">900 · #632105</span></div>
+  </div>
+</body>
+</html>

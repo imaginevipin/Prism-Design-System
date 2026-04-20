@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imagine.io — App UI Kit</title>
+<style>
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Light.otf") format("opentype"); font-weight: 300; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Regular.otf") format("opentype"); font-weight: 400; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-SemiBold.otf") format("opentype"); font-weight: 600; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --papaya-100: #f9c8b3; --papaya-400: #f0713c; --papaya-500: #ec4e0b; --papaya-600: #d7470a; --papaya-700: #a83708;
+  --dark-500: #363636; --dark-900: #171717;
+  --light-200: #f9f9f9; --light-300: #f7f7f7; --light-400: #e1e1e1; --light-500: #d9d9d9; --light-600: #afafaf; --light-700: #787878; --light-900: #686868;
+  --success-500: #00c853; --alert-500: #f44336;
+  --shadow-100: 0 0 10px rgba(0,0,0,.15); --shadow-200: 0 0 40px rgba(0,0,0,.20); --shadow-400: 0 0 40px rgba(0,0,0,.25);
+  --radius: 5px; --font: "PP Neue Montreal", system-ui, sans-serif;
+}
+
+html, body { height: 100%; overflow: hidden; font-family: var(--font); font-size: 15px; color: var(--dark-900); background: #f0f0f0; -webkit-font-smoothing: antialiased; }
+
+/* ── Shell ───────────────────────────────────────────────── */
+.shell { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
+
+/* ── Left Nav ───────────────────────────────────────────── */
+.nav { width: 236px; min-width: 236px; background: #fff; border-right: 1px solid var(--light-300); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.nav-logo { height: 64px; display: flex; align-items: center; padding: 0 24px; border-bottom: 1px solid var(--light-300); flex-shrink: 0; }
+.nav-logo img { height: 22px; }
+.nav-section { padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius); font-size: 15px; font-weight: 500; letter-spacing: .01em; color: var(--light-900); cursor: pointer; user-select: none; transition: background .12s, color .12s; }
+.nav-item:hover { background: var(--light-300); color: var(--dark-500); }
+.nav-item.active { background: #fdf1eb; color: var(--papaya-500); }
+.nav-item svg { width: 20px; height: 20px; flex-shrink: 0; opacity: .7; }
+.nav-item.active svg { opacity: 1; }
+.nav-divider { height: 1px; background: var(--light-300); margin: 4px 12px; }
+.nav-bottom { padding: 12px; display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--light-300); flex-shrink: 0; }
+
+/* ── Main ───────────────────────────────────────────────── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+
+/* ── Top Bar ────────────────────────────────────────────── */
+.topbar { height: 64px; min-height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--light-400); background: #fff; flex-shrink: 0; position: relative; z-index: 10; }
+.topbar-left { display: flex; align-items: center; gap: 6px; }
+.breadcrumb { font-size: 15px; font-weight: 500; color: var(--dark-500); letter-spacing: .01em; }
+.breadcrumb-active { color: var(--dark-900); }
+.breadcrumb-sep { color: var(--light-500); margin: 0 4px; font-weight: 400; }
+.topbar-right { display: flex; align-items: center; gap: 8px; }
+.icon-btn { width: 36px; height: 36px; border-radius: var(--radius); background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--light-900); transition: background .12s; position: relative; }
+.icon-btn:hover { background: var(--light-300); }
+.notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--papaya-500); position: absolute; top: 5px; right: 6px; border: 1.5px solid #fff; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--papaya-500); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; cursor: pointer; flex-shrink: 0; }
+
+/* ── Content ────────────────────────────────────────────── */
+.content { flex: 1; overflow-y: auto; overflow-x: hidden; }
+
+/* ── Pages ──────────────────────────────────────────────── */
+.page { display: none; height: 100%; }
+.page.active { display: flex; flex-direction: column; height: 100%; }
+
+/* ── Toolbar ────────────────────────────────────────────── */
+.toolbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--light-400); background: #fff; flex-shrink: 0; gap: 12px; }
+.toolbar-left { display: flex; align-items: center; gap: 8px; }
+.toolbar-right { display: flex; align-items: center; gap: 8px; }
+.search-box { display: flex; align-items: center; gap: 8px; height: 36px; border: 1px solid var(--light-400); border-radius: var(--radius); padding: 0 12px; font-size: 14px; font-family: var(--font); color: var(--dark-900); width: 240px; background: #fff; outline: none; transition: border-color .15s; }
+.search-box:focus { border-color: var(--papaya-500); }
+.view-toggle { display: flex; border: 1px solid var(--light-400); border-radius: var(--radius); overflow: hidden; }
+.view-btn { width: 32px; height: 32px; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--light-700); transition: background .1s, color .1s; }
+.view-btn.active { background: var(--light-300); color: var(--dark-500); }
+
+/* ── Grid of cards ───────────────────────────────────────── */
+.card-grid { padding: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.product-card { border-radius: var(--radius); border: 1px solid var(--light-400); background: #fff; overflow: hidden; cursor: pointer; transition: box-shadow .15s, transform .12s; }
+.product-card:hover { box-shadow: var(--shadow-200); transform: translateY(-1px); }
+.card-thumb { aspect-ratio: 4/3; background: var(--light-200); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.card-thumb-img { width: 100%; height: 100%; object-fit: cover; }
+.card-thumb-placeholder { width: 48px; height: 48px; background: var(--light-500); border-radius: 4px; opacity: .4; }
+.card-badge { position: absolute; top: 8px; right: 8px; background: #fff; border-radius: 4px; padding: 3px 7px; font-size: 10px; font-weight: 500; color: var(--dark-500); box-shadow: var(--shadow-100); }
+.card-actions { position: absolute; bottom: 8px; right: 8px; display: flex; gap: 4px; opacity: 0; transition: opacity .15s; }
+.product-card:hover .card-actions { opacity: 1; }
+.card-action-btn { width: 28px; height: 28px; border-radius: 4px; background: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-100); color: var(--dark-500); }
+.card-info { padding: 10px 12px; }
+.card-name { font-size: 14px; font-weight: 500; color: var(--dark-900); letter-spacing: .01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-meta { font-size: 11px; color: var(--light-900); margin-top: 2px; }
+
+/* ── Detail panel ───────────────────────────────────────── */
+.detail-layout { display: flex; flex: 1; overflow: hidden; }
+.detail-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.detail-viewer { flex: 1; background: var(--light-200); display: flex; align-items: center; justify-content: center; min-height: 0; }
+.viewer-placeholder { display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--light-700); }
+.viewer-placeholder svg { width: 48px; height: 48px; opacity: .3; }
+.viewer-placeholder span { font-size: 13px; }
+.detail-actions { padding: 12px 16px; border-top: 1px solid var(--light-400); display: flex; gap: 8px; background: #fff; flex-shrink: 0; }
+.detail-panel { width: 280px; border-left: 1px solid var(--light-400); overflow-y: auto; background: #fff; flex-shrink: 0; }
+.detail-panel-section { padding: 16px; border-bottom: 1px solid var(--light-300); }
+.panel-title { font-size: 12px; font-weight: 600; color: var(--dark-500); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.panel-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; }
+.panel-label { color: var(--light-900); }
+.panel-value { color: var(--dark-900); font-weight: 500; }
+.panel-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: 3px; font-size: 10px; font-weight: 500; background: var(--light-200); color: var(--dark-500); margin: 2px 2px 2px 0; }
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn { font-family: var(--font); font-size: 15px; font-weight: 500; letter-spacing: .01em; border: none; border-radius: var(--radius); height: 44px; padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background .12s, color .12s; }
+.btn-sm { height: 36px; font-size: 13px; padding: 0 12px; }
+.btn-primary { background: var(--papaya-500); color: #fbfbfb; }
+.btn-primary:hover { background: var(--papaya-600); }
+.btn-secondary { background: var(--dark-500); color: #fbfbfb; }
+.btn-secondary:hover { background: var(--dark-900); }
+.btn-outline { background: transparent; color: var(--dark-500); border: 1px solid var(--light-400); }
+.btn-outline:hover { border-color: var(--dark-500); }
+.btn-ghost { background: transparent; color: var(--light-900); }
+.btn-ghost:hover { background: var(--light-300); color: var(--dark-500); }
+.btn-danger { background: transparent; color: var(--alert-500); border: 1px solid var(--alert-500); }
+
+/* ── Notification panel ────────────────────────────────── */
+.notif-panel { position: absolute; top: 64px; right: 16px; width: 340px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow-200); z-index: 100; overflow: hidden; display: none; }
+.notif-panel.open { display: block; }
+.notif-header { padding: 14px 16px; border-bottom: 1px solid var(--light-300); display: flex; align-items: center; justify-content: space-between; }
+.notif-title { font-size: 16px; font-weight: 600; }
+.notif-item { padding: 12px 16px; border-bottom: 1px solid var(--light-300); display: flex; gap: 10px; cursor: pointer; }
+.notif-item:hover { background: var(--light-200); }
+.notif-item.unread { background: #fdf8f5; }
+.notif-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.notif-text { flex: 1; }
+.notif-msg { font-size: 13px; color: var(--dark-900); line-height: 1.4; }
+.notif-time { font-size: 11px; color: var(--light-900); margin-top: 2px; }
+
+/* ── Account menu ────────────────────────────────────────── */
+.account-menu { position: absolute; top: 64px; right: 16px; width: 275px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow-200); z-index: 100; overflow: hidden; display: none; padding: 12px; }
+.account-menu.open { display: block; }
+.account-header { padding: 10px 12px; margin-bottom: 4px; }
+.account-name { font-size: 15px; font-weight: 500; color: var(--dark-900); }
+.account-email { font-size: 12px; color: var(--light-900); margin-top: 1px; }
+.menu-divider { height: 1px; background: var(--light-300); margin: 4px 0; }
+.menu-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius); font-size: 15px; font-weight: 500; letter-spacing: .01em; color: var(--dark-500); cursor: pointer; }
+.menu-item:hover { background: var(--light-300); }
+.menu-item.danger { color: var(--alert-500); }
+.menu-item.accent { color: var(--papaya-500); }
+
+/* ── Upload/Curator areas ────────────────────────────────── */
+.upload-zone { border: 2px dashed var(--light-400); border-radius: var(--radius); padding: 48px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; cursor: pointer; transition: border-color .15s, background .15s; }
+.upload-zone:hover { border-color: var(--papaya-500); background: #fdf8f5; }
+.upload-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--light-200); display: flex; align-items: center; justify-content: center; }
+.upload-title { font-size: 16px; font-weight: 500; color: var(--dark-900); }
+.upload-sub { font-size: 13px; color: var(--light-900); text-align: center; }
+
+/* ── Empty state ────────────────────────────────────────── */
+.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; flex: 1; padding: 48px; text-align: center; }
+.empty-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--light-200); display: flex; align-items: center; justify-content: center; }
+.empty-title { font-size: 20px; font-weight: 600; color: var(--dark-900); }
+.empty-sub { font-size: 14px; color: var(--light-900); max-width: 300px; line-height: 1.5; }
+
+/* Overlay backdrop */
+.backdrop { display: none; position: fixed; inset: 0; z-index: 90; }
+.backdrop.open { display: block; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- Left Nav -->
+  <nav class="nav">
+    <div>
+      <div class="nav-logo">
+        <img src="../../assets/logo-horizontal-dark.png" alt="imagine.io">
+      </div>
+      <div class="nav-section">
+        <div class="nav-item active" onclick="showPage('products', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="9" height="9" rx="1.5"/><rect x="13" y="3" width="9" height="9" rx="1.5"/><rect x="2" y="13" width="9" height="9" rx="1.5"/><rect x="13" y="13" width="9" height="9" rx="1.5"/></svg>
+          Products
+        </div>
+        <div class="nav-item" onclick="showPage('collections', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          Collections
+        </div>
+        <div class="nav-item" onclick="showPage('curator', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+          Curator
+        </div>
+        <div class="nav-item" onclick="showPage('templates', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Templates
+        </div>
+        <div class="nav-item" onclick="showPage('automation', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Automation
+        </div>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <div class="nav-divider" style="margin:0 0 4px"></div>
+      <div class="nav-item" onclick="showPage('plan', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        My plan
+      </div>
+      <div class="nav-item" onclick="showPage('settings', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="breadcrumb" id="breadcrumb">Products</span>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" onclick="toggleNotif()" title="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="notif-dot"></div>
+        </button>
+        <div class="avatar" onclick="toggleAccount()">OC</div>
+      </div>
+    </div>
+
+    <!-- Content pages -->
+    <div class="content">
+
+      <!-- Products page -->
+      <div class="page active" id="page-products">
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <input class="search-box" placeholder="Search products…" type="text">
+            <button class="btn btn-outline btn-sm">Filter</button>
+          </div>
+          <div class="toolbar-right">
+            <div class="view-toggle">
+              <button class="view-btn active" title="Grid">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </button>
+              <button class="view-btn" title="List">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+              </button>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="showPage('upload', null)">+ Upload</button>
+          </div>
+        </div>
+        <div class="card-grid">
+  <div id="product-cards-slot"></div>
+        </div>
+      </div>
+
+      <!-- Product detail -->
+      <div class="page" id="page-detail">
+        <div class="detail-layout">
+          <div class="detail-main">
+            <div class="detail-viewer">
+              <div class="viewer-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                <span>3D Viewer</span>
+              </div>
+            </div>
+            <div class="detail-actions">
+              <button class="btn btn-primary btn-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download
+              </button>
+              <button class="btn btn-outline btn-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share
+              </button>
+              <button class="btn btn-outline btn-sm">Generate renders</button>
+              <button class="btn btn-ghost btn-sm" onclick="showPage('products', null)" style="margin-left:auto">← Back</button>
+            </div>
+          </div>
+          <div class="detail-panel">
+            <div class="detail-panel-section">
+              <div class="panel-title">Product info</div>
+              <div class="panel-row"><span class="panel-label">Name</span><span class="panel-value" id="detail-name">—</span></div>
+              <div class="panel-row"><span class="panel-label">SKU</span><span class="panel-value" id="detail-sku">—</span></div>
+              <div class="panel-row"><span class="panel-label">Status</span><span class="panel-value" id="detail-status">—</span></div>
+              <div class="panel-row"><span class="panel-label">Category</span><span class="panel-value">Furniture</span></div>
+            </div>
+            <div class="detail-panel-section">
+              <div class="panel-title">3D assets</div>
+              <div class="panel-row"><span class="panel-label">Format</span><span class="panel-value">GLB, USDZ</span></div>
+              <div class="panel-row"><span class="panel-label">Resolution</span><span class="panel-value">4K</span></div>
+              <div class="panel-row"><span class="panel-label">Renders</span><span class="panel-value">8 images</span></div>
+            </div>
+            <div class="detail-panel-section">
+              <div class="panel-title">Tags</div>
+              <span class="panel-tag">furniture</span>
+              <span class="panel-tag">living room</span>
+              <span class="panel-tag">modern</span>
+              <span class="panel-tag">neutral</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collections -->
+      <div class="page" id="page-collections">
+        <div class="toolbar">
+          <div class="toolbar-left"><input class="search-box" placeholder="Search collections…" type="text"></div>
+          <div class="toolbar-right"><button class="btn btn-primary btn-sm">+ New collection</button></div>
+        </div>
+        <div class="card-grid">
+<div id="collection-cards-slot"></div>
+        </div>
+      </div>
+
+      <!-- Upload -->
+      <div class="page" id="page-upload">
+        <div style="padding:32px;max-width:640px;margin:0 auto;flex:1">
+          <h2 style="font-size:26px;font-weight:600;margin-bottom:8px">Upload product</h2>
+          <p style="font-size:14px;color:var(--light-900);margin-bottom:24px">Upload your 3D assets or product images to generate photorealistic renders.</p>
+          <div class="upload-zone">
+            <div class="upload-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="upload-title">Drop files here</div>
+            <div class="upload-sub">Supports GLB, OBJ, FBX, USDZ, JPG, PNG<br>Max 500 MB per file</div>
+            <button class="btn btn-outline btn-sm">Browse files</button>
+          </div>
+          <div style="margin-top:24px;display:flex;gap:8px">
+            <button class="btn btn-primary">Start upload</button>
+            <button class="btn btn-ghost" onclick="showPage('products', null)">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curator -->
+      <div class="page" id="page-curator">
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="empty-title">Curator</div>
+          <div class="empty-sub">Generate photorealistic lifestyle and silo renders from your 3D products. Select a product to get started.</div>
+          <button class="btn btn-primary" onclick="showPage('products', null)">Browse products</button>
+        </div>
+      </div>
+
+      <!-- Templates -->
+      <div class="page" id="page-templates">
+        <div class="toolbar">
+          <div class="toolbar-left"><input class="search-box" placeholder="Search templates…" type="text"></div>
+        </div>
+        <div class="card-grid">
+<div id="template-cards-slot"></div>
+        </div>
+      </div>
+
+      <!-- Automation -->
+      <div class="page" id="page-automation">
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="empty-title">Automation</div>
+          <div class="empty-sub">Create automated pipelines to process, render, and distribute your 3D content at scale.</div>
+          <button class="btn btn-primary">Create workflow</button>
+        </div>
+      </div>
+
+      <!-- Plan -->
+      <div class="page" id="page-plan">
+        <div style="padding:32px;max-width:600px">
+          <h2 style="font-size:26px;font-weight:600;margin-bottom:4px">My plan</h2>
+          <p style="font-size:14px;color:var(--light-900);margin-bottom:24px">You're on the <strong>Business</strong> plan.</p>
+          <div style="border:1px solid var(--light-400);border-radius:var(--radius);padding:20px;margin-bottom:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <span style="font-size:18px;font-weight:600">Business</span>
+              <span style="background:#fdf1eb;color:var(--papaya-500);font-size:12px;font-weight:600;padding:4px 10px;border-radius:4px">Active</span>
+            </div>
+            <div style="font-size:14px;color:var(--light-900);margin-bottom:16px">500 renders/month · Unlimited products · Priority support</div>
+            <div style="height:6px;background:var(--light-300);border-radius:3px;overflow:hidden;margin-bottom:6px"><div style="width:62%;height:100%;background:var(--papaya-500);border-radius:3px"></div></div>
+            <div style="font-size:12px;color:var(--light-900)">310 / 500 renders used this month</div>
+          </div>
+          <button class="btn btn-primary btn-sm">Upgrade plan</button>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="page" id="page-settings">
+        <div style="padding:32px;max-width:560px">
+          <h2 style="font-size:26px;font-weight:600;margin-bottom:24px">Settings</h2>
+          <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--light-400);border-radius:var(--radius);overflow:hidden">
+<div id="settings-list-slot"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- Notifications panel -->
+<div class="backdrop" id="notif-backdrop" onclick="closeOverlays()"></div>
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-header">
+    <span class="notif-title">Notifications</span>
+    <button class="btn btn-ghost btn-sm" style="height:28px;font-size:12px">Mark all read</button>
+  </div>
+  <div class="notif-item unread">
+    <div class="notif-icon" style="background:#fdf1eb"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ec4e0b" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+    <div class="notif-text"><div class="notif-msg">8 renders completed for <strong>Linen Sofa</strong></div><div class="notif-time">2 minutes ago</div></div>
+  </div>
+  <div class="notif-item unread">
+    <div class="notif-icon" style="background:#e6faf0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="notif-text"><div class="notif-msg">Processing complete for <strong>Oak Coffee Table</strong></div><div class="notif-time">1 hour ago</div></div>
+  </div>
+  <div class="notif-item">
+    <div class="notif-icon" style="background:var(--light-200)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <div class="notif-text"><div class="notif-msg">Sarah invited you to <strong>Bedroom Essentials</strong></div><div class="notif-time">Yesterday</div></div>
+  </div>
+</div>
+
+<!-- Account menu -->
+<div class="account-menu" id="account-menu">
+  <div class="account-header">
+    <div class="account-name">Oli Chalmers</div>
+    <div class="account-email">oli.chalmers@gmail.com</div>
+  </div>
+  <div class="menu-divider"></div>
+  <div class="menu-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Profile
+  </div>
+  <div class="menu-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Organization
+  </div>
+  <div class="menu-item accent" onclick="closeOverlays(); showPage('plan', null)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Invite teammates
+  </div>
+  <div class="menu-divider"></div>
+  <div class="menu-item danger">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    Log out
+  </div>
+</div>
+
+<script>
+const pages = {
+  products: 'Products', collections: 'Collections', curator: 'Curator',
+  templates: 'Templates', automation: 'Automation', plan: 'My plan',
+  settings: 'Settings', upload: 'Upload', detail: 'Products / Detail'
+};
+
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('breadcrumb').textContent = pages[id] || id;
+  if (navEl) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    navEl.classList.add('active');
+  }
+  closeOverlays();
+}
+
+function showDetail(name, sku, status) {
+  document.getElementById('detail-name').textContent = name;
+  document.getElementById('detail-sku').textContent = sku;
+  document.getElementById('detail-status').textContent = status;
+  showPage('detail', null);
+}
+
+function toggleNotif() {
+  const panel = document.getElementById('notif-panel');
+  const acct = document.getElementById('account-menu');
+  const bd = document.getElementById('notif-backdrop');
+  const wasOpen = panel.classList.contains('open');
+  acct.classList.remove('open');
+  panel.classList.toggle('open', !wasOpen);
+  bd.classList.toggle('open', !wasOpen);
+}
+
+function toggleAccount() {
+  const menu = document.getElementById('account-menu');
+  const notif = document.getElementById('notif-panel');
+  const bd = document.getElementById('notif-backdrop');
+  const wasOpen = menu.classList.contains('open');
+  notif.classList.remove('open');
+  menu.classList.toggle('open', !wasOpen);
+  bd.classList.toggle('open', !wasOpen);
+}
+
+function closeOverlays() {
+  document.getElementById('notif-panel').classList.remove('open');
+  document.getElementById('account-menu').classList.remove('open');
+  document.getElementById('notif-backdrop').classList.remove('open');
+}
+
+// Persist nav state
+const saved = localStorage.getItem('prism-page');
+if (saved && document.getElementById('page-' + saved)) {
+  const navEl = [...document.querySelectorAll('.nav-item')].find(el => el.textContent.trim().toLowerCase().replace(/\s/g,'') === saved.replace(/-/g,''));
+  showPage(saved, navEl || null);
+}
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    const id = [...document.querySelectorAll('.nav-item')].indexOf(el);
+    const pageIds = ['products','collections','curator','templates','automation','plan','settings'];
+    localStorage.setItem('prism-page', pageIds[id] || 'products');
+  });
+});
+
+// Generate product cards
+(function() {
+  const products = [
+    {name:'Linen Sofa', sku:'SKU-001', status:'Ready', color:'#c8b8a2'},
+    {name:'Oak Coffee Table', sku:'SKU-002', status:'Processing', color:'#9e7e5a'},
+    {name:'Velvet Armchair', sku:'SKU-003', status:'Ready', color:'#7b8fa1'},
+    {name:'Marble Side Table', sku:'SKU-004', status:'Draft', color:'#c0bdb8'},
+    {name:'Wool Area Rug', sku:'SKU-005', status:'Ready', color:'#b08060'},
+    {name:'Ceramic Vase', sku:'SKU-006', status:'Ready', color:'#e8d5b5'},
+    {name:'Teak Dining Chair', sku:'SKU-007', status:'Processing', color:'#8b6a50'},
+    {name:'Brass Floor Lamp', sku:'SKU-008', status:'Ready', color:'#d4a840'},
+  ];
+  const editSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>';
+  const moreSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>';
+  document.getElementById('product-cards-slot').innerHTML = products.map(function(p) {
+    return '<div class="product-card" onclick="showDetail(\'' + p.name + '\', \'' + p.sku + '\', \'' + p.status + '\')">' +
+      '<div class="card-thumb">' +
+        '<div style="width:100%;height:100%;background:' + p.color + '20;display:flex;align-items:center;justify-content:center">' +
+          '<div style="width:60px;height:60px;background:' + p.color + ';border-radius:4px;opacity:.7"></div>' +
+        '</div>' +
+        '<span class="card-badge">' + p.status + '</span>' +
+        '<div class="card-actions">' +
+          '<button class="card-action-btn" title="Edit">' + editSvg + '</button>' +
+          '<button class="card-action-btn" title="More">' + moreSvg + '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-info">' +
+        '<div class="card-name">' + p.name + '</div>' +
+        '<div class="card-meta">' + p.sku + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Collections
+  const colls = ['Living Room 2025','Outdoor Summer','Bedroom Essentials','Kitchen & Dining'];
+  const collCounts = [6,12,4,8];
+  document.getElementById('collection-cards-slot').innerHTML = colls.map(function(n, i) {
+    var dots = [0,1,2,3].map(function(j) {
+      return '<div style="width:20px;height:20px;background:hsl(' + (i*60+j*15+20) + ',30%,60%);border-radius:2px"></div>';
+    }).join('');
+    return '<div class="product-card">' +
+      '<div class="card-thumb">' +
+        '<div style="width:100%;height:100%;background:hsl(' + (i*60+20) + ',20%,90%);display:flex;align-items:center;justify-content:center">' +
+          '<div style="display:flex;gap:4px">' + dots + '</div>' +
+        '</div>' +
+        '<span class="card-badge">' + collCounts[i] + ' items</span>' +
+      '</div>' +
+      '<div class="card-info">' +
+        '<div class="card-name">' + n + '</div>' +
+        '<div class="card-meta">Updated 2 days ago</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Templates
+  const templates = ['Living Room A','Bedroom Suite','Studio Flat','Dining Room','Outdoor Patio','Modern Office'];
+  document.getElementById('template-cards-slot').innerHTML = templates.map(function(n, i) {
+    return '<div class="product-card">' +
+      '<div class="card-thumb" style="background:hsl(' + (i*40+200) + ',15%,85%)">' +
+        '<div style="padding:20px;width:100%;height:100%;display:flex;align-items:center;justify-content:center">' +
+          '<div style="width:80%;height:70%;background:hsl(' + (i*40+200) + ',15%,70%);border-radius:3px"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-info">' +
+        '<div class="card-name">' + n + '</div>' +
+        '<div class="card-meta">Template</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Settings
+  var settingsItems = ['Profile','Organization','Billing','API keys','Integrations'];
+  var chevron = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+  document.getElementById('settings-list-slot').innerHTML = settingsItems.map(function(s, i) {
+    var border = i < settingsItems.length - 1 ? 'border-bottom:1px solid var(--light-300)' : '';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;' + border + '">' +
+      '<span style="font-size:15px;font-weight:500">' + s + '</span>' + chevron +
+    '</div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PP Neue Montreal", sans-serif; background: #fff; padding: 20px 24px; }
+  .row { display: flex; gap: 24px; }
+  .col { flex: 1; }
+  .col-label { font-size: 11px; font-weight: 600; color: #363636; margin-bottom: 8px; }
+  .scale { display: flex; gap: 4px; margin-bottom: 6px; }
+  .swatch { flex: 1; height: 28px; border-radius: 3px; }
+  .main { font-size: 10px; color: #686868; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="col">
+      <div class="col-label">Success</div>
+      <div class="scale">
+        <div class="swatch" style="background:#b0eeca;border:1px solid #e1e1e1"></div>
+        <div class="swatch" style="background:#8ae6b0"></div>
+        <div class="swatch" style="background:#54da8c"></div>
+        <div class="swatch" style="background:#33d375"></div>
+        <div class="swatch" style="background:#00c853;outline:2px solid #363636;outline-offset:2px"></div>
+        <div class="swatch" style="background:#00b64c"></div>
+        <div class="swatch" style="background:#008e3b"></div>
+        <div class="swatch" style="background:#006e2e"></div>
+        <div class="swatch" style="background:#005423"></div>
+      </div>
+      <div class="main">500 · #00c853</div>
+    </div>
+    <div class="col">
+      <div class="col-label">Alert</div>
+      <div class="scale">
+        <div class="swatch" style="background:#ffe5e4;border:1px solid #e1e1e1"></div>
+        <div class="swatch" style="background:#ffbcba"></div>
+        <div class="swatch" style="background:#ff8f8c"></div>
+        <div class="swatch" style="background:#f96260"></div>
+        <div class="swatch" style="background:#f44336;outline:2px solid #363636;outline-offset:2px"></div>
+        <div class="swatch" style="background:#e53935"></div>
+        <div class="swatch" style="background:#c62828"></div>
+        <div class="swatch" style="background:#912018"></div>
+        <div class="swatch" style="background:#661c17"></div>
+      </div>
+      <div class="main">500 · #f44336</div>
+    </div>
+    <div class="col">
+      <div class="col-label">Warning</div>
+      <div class="scale">
+        <div class="swatch" style="background:#fff9e0;border:1px solid #e1e1e1"></div>
+        <div class="swatch" style="background:#fff0a8"></div>
+        <div class="swatch" style="background:#ffe566"></div>
+        <div class="swatch" style="background:#ffd932"></div>
+        <div class="swatch" style="background:#ffc800;outline:2px solid #363636;outline-offset:2px"></div>
+        <div class="swatch" style="background:#e6af00"></div>
+        <div class="swatch" style="background:#b38700"></div>
+        <div class="swatch" style="background:#8a6200"></div>
+        <div class="swatch" style="background:#6b6319"></div>
+      </div>
+      <div class="main">500 · #ffc800</div>
+    </div>
+    <div class="col" style="flex:0.6">
+      <div class="col-label">Accents</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:40px;height:28px;border-radius:3px;background:#9747ff"></div>
+          <span style="font-size:10px;color:#686868">#9747ff — Purple</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:40px;height:28px;border-radius:3px;background:#0059f1"></div>
+          <span style="font-size:10px;color:#686868">#0059f1 — Blue</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Regular.otf") format("opentype"); font-weight: 400; }
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-SemiBold.otf") format("opentype"); font-weight: 600; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PP Neue Montreal", sans-serif; background: #f7f7f7; padding: 20px 24px; }
+  .frame { display: flex; border-radius: 8px; overflow: hidden; border: 1px solid #e1e1e1; background: #fff; height: 240px; width: 420px; }
+
+  /* Left Nav */
+  .nav { width: 236px; min-width: 236px; background: #fff; border-right: 1px solid #f7f7f7; display: flex; flex-direction: column; justify-content: space-between; }
+  .nav-logo { height: 64px; display: flex; align-items: center; justify-content: center; padding: 0 24px; border-bottom: 1px solid #f7f7f7; }
+  .nav-logo img { height: 22px; }
+  .nav-items { padding: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 5px; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; color: #686868; cursor: pointer; }
+  .nav-item:hover { background: #f7f7f7; color: #363636; }
+  .nav-item.active { background: #fdf1eb; color: #ec4e0b; }
+  .nav-icon { width: 20px; height: 20px; background: currentColor; border-radius: 2px; opacity: 0.6; flex-shrink: 0; }
+  .nav-bottom { padding: 12px; display: flex; flex-direction: column; gap: 4px; border-top: 1px solid #f7f7f7; }
+
+  /* Main area */
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .topbar { height: 64px; min-height: 64px; border-bottom: 1px solid #e1e1e1; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: #fff; }
+  .topbar-left { display: flex; align-items: center; gap: 8px; }
+  .breadcrumb { font-size: 15px; font-weight: 500; color: #171717; letter-spacing: 0.01em; }
+  .breadcrumb-sep { color: #d9d9d9; margin: 0 4px; }
+  .topbar-right { display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: #ec4e0b; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; }
+  .notif-btn { width: 32px; height: 32px; border-radius: 5px; background: #f7f7f7; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+  .notif-dot { width: 7px; height: 7px; border-radius: 50%; background: #ec4e0b; position: absolute; top: 4px; right: 5px; border: 1.5px solid #fff; }
+  .content { flex: 1; background: #f9f9f9; padding: 16px; }
+  .content-placeholder { background: #f0f0f0; border-radius: 5px; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #afafaf; }
+
+  .spec { margin-top: 12px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .spec-item { font-size: 10px; color: #686868; }
+  .spec-item strong { color: #363636; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="nav">
+      <div>
+        <div class="nav-logo">
+          <img src="../assets/logo-horizontal-dark.png" alt="imagine.io">
+        </div>
+        <div class="nav-items">
+          <div class="nav-item active">
+            <div class="nav-icon" style="background:#ec4e0b;opacity:1;border-radius:3px"></div>
+            Products
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon"></div>
+            Collections
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon"></div>
+            Curator
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon"></div>
+            Templates
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon"></div>
+            Automation
+          </div>
+        </div>
+      </div>
+      <div class="nav-bottom">
+        <div class="nav-item"><div class="nav-icon"></div>My plan</div>
+        <div class="nav-item"><div class="nav-icon"></div>Settings</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="breadcrumb">imagine.io <span class="breadcrumb-sep">/</span> Products</span>
+        </div>
+        <div class="topbar-right">
+          <div class="notif-btn"><div class="notif-dot"></div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div class="avatar">OC</div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="content-placeholder">Content area</div>
+      </div>
+    </div>
+  </div>
+  <div class="spec">
+    <div class="spec-item"><strong>Left nav</strong> 236px · white · border-right #f7f7f7</div>
+    <div class="spec-item"><strong>Top bar</strong> 64px · white · border-bottom #e1e1e1</div>
+    <div class="spec-item"><strong>Active item</strong> bg #fdf1eb · color papaya-500</div>
+    <div class="spec-item"><strong>Nav item</strong> h 40px · radius 5px · pad 8px 12px</div>
+  </div>
+</body>
+</html>

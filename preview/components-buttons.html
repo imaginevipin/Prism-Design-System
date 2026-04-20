@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "PP Neue Montreal"; src: url("../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PP Neue Montreal", sans-serif; background: #fff; padding: 20px 24px; }
+  .row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .label { font-size: 10px; color: #686868; min-width: 70px; }
+  button { font-family: "PP Neue Montreal", sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.01em; border: none; cursor: pointer; border-radius: 5px; height: 44px; padding: 0 16px; line-height: 1.4; }
+  button.sm { height: 36px; font-size: 12px; padding: 0 12px; }
+  .primary { background: #ec4e0b; color: #fbfbfb; }
+  .primary:hover { background: #d7470a; }
+  .secondary { background: #363636; color: #fbfbfb; }
+  .outline { background: transparent; color: #363636; border: 1px solid #363636; }
+  .blank { background: transparent; color: #363636; }
+  .tertiary { background: transparent; color: #ec4e0b; }
+  .dark-btn { background: #171717; color: #fbfbfb; }
+  .disabled { background: #d9d9d9; color: #afafaf; cursor: not-allowed; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <span class="label">Standard (44px)</span>
+    <button class="primary">Primary</button>
+    <button class="secondary">Secondary</button>
+    <button class="outline">Outline</button>
+    <button class="blank">Blank</button>
+    <button class="tertiary">Tertiary</button>
+    <button class="dark-btn">Dark</button>
+    <button class="primary disabled" disabled>Disabled</button>
+  </div>
+  <div class="row">
+    <span class="label">Small (36px)</span>
+    <button class="primary sm">Primary</button>
+    <button class="secondary sm">Secondary</button>
+    <button class="outline sm">Outline</button>
+    <button class="blank sm">Blank</button>
+    <button class="tertiary sm">Tertiary</button>
+    <button class="dark-btn sm">Dark</button>
+  </div>
+</body>
+</html>

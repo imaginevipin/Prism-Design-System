@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imagine.io — Marketing Website</title>
+<style>
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Light.otf") format("opentype"); font-weight: 300; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Regular.otf") format("opentype"); font-weight: 400; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-SemiBold.otf") format("opentype"); font-weight: 600; }
+@font-face { font-family: "PP Neue Montreal"; src: url("../../fonts/PPNeueMontreal-Bold.otf") format("opentype"); font-weight: 700; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --papaya-500: #ec4e0b; --papaya-600: #d7470a; --papaya-100: #f9c8b3;
+  --dark-500: #363636; --dark-900: #171717;
+  --light-200: #f9f9f9; --light-300: #f7f7f7; --light-400: #e1e1e1; --light-700: #787878; --light-900: #686868;
+  --radius: 5px; --font: "PP Neue Montreal", system-ui, sans-serif;
+  --shadow-200: 0 0 40px rgba(0,0,0,.20);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--dark-900); background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* ── Pages ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── Nav ── */
+.site-nav { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--light-400); height: 64px; display: flex; align-items: center; padding: 0 64px; gap: 40px; }
+.site-nav-logo img { height: 22px; display: block; }
+.site-nav-links { display: flex; align-items: center; gap: 28px; flex: 1; }
+.site-nav-link { font-size: 15px; font-weight: 500; color: var(--light-700); letter-spacing: .01em; cursor: pointer; text-decoration: none; transition: color .12s; }
+.site-nav-link:hover, .site-nav-link.active { color: var(--dark-900); }
+.site-nav-right { display: flex; align-items: center; gap: 10px; }
+.btn { font-family: var(--font); font-size: 15px; font-weight: 500; letter-spacing: .01em; border: none; border-radius: var(--radius); height: 44px; padding: 0 20px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background .12s; }
+.btn-sm { height: 36px; font-size: 14px; padding: 0 16px; }
+.btn-primary { background: var(--papaya-500); color: #fbfbfb; }
+.btn-primary:hover { background: var(--papaya-600); }
+.btn-outline { background: transparent; color: var(--dark-500); border: 1px solid var(--light-400); }
+.btn-outline:hover { border-color: var(--dark-500); }
+.btn-ghost { background: transparent; color: var(--dark-500); }
+.btn-ghost:hover { color: var(--papaya-500); }
+.btn-dark { background: var(--dark-900); color: #fbfbfb; }
+.btn-dark:hover { background: var(--dark-500); }
+
+/* ── Hero ── */
+.hero { padding: 100px 64px 80px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; background: var(--light-300); border-radius: 4px; padding: 5px 10px; font-size: 12px; font-weight: 500; color: var(--dark-500); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
+.hero-title { font-size: 52px; font-weight: 600; line-height: 1.1; color: var(--dark-900); margin-bottom: 20px; letter-spacing: -.01em; }
+.hero-title span { color: var(--papaya-500); }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--light-700); line-height: 1.6; margin-bottom: 32px; max-width: 460px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; }
+.hero-visual { background: var(--light-200); border-radius: 8px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.hero-visual-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+.hero-3d-block { width: 120px; height: 120px; background: linear-gradient(135deg, #f0713c, #632105); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 16px 48px rgba(236,78,11,.25); }
+.hero-badge { position: absolute; bottom: 20px; left: 20px; background: #fff; border-radius: var(--radius); padding: 10px 14px; box-shadow: var(--shadow-200); display: flex; align-items: center; gap: 8px; }
+.hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--papaya-500); }
+
+/* ── Section ── */
+.section { padding: 80px 64px; max-width: 1200px; margin: 0 auto; }
+.section-full { padding: 80px 0; background: var(--light-200); }
+.section-full-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+.section-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--papaya-500); margin-bottom: 12px; }
+.section-title { font-size: 37px; font-weight: 600; line-height: 1.2; color: var(--dark-900); margin-bottom: 16px; }
+.section-sub { font-size: 16px; color: var(--light-700); line-height: 1.6; max-width: 520px; }
+.section-header { margin-bottom: 48px; }
+
+/* ── Feature grid ── */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card { padding: 28px; border: 1px solid var(--light-400); border-radius: var(--radius); background: #fff; transition: box-shadow .15s; }
+.feature-card:hover { box-shadow: var(--shadow-200); }
+.feature-icon { width: 44px; height: 44px; border-radius: var(--radius); background: #fdf1eb; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--papaya-500); }
+.feature-title { font-size: 18px; font-weight: 600; color: var(--dark-900); margin-bottom: 8px; }
+.feature-desc { font-size: 14px; color: var(--light-700); line-height: 1.6; }
+
+/* ── Product showcase ── */
+.showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.showcase.reverse { direction: rtl; }
+.showcase.reverse > * { direction: ltr; }
+.showcase-visual { background: var(--light-200); border-radius: 8px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.showcase-content { display: flex; flex-direction: column; gap: 16px; }
+.showcase-title { font-size: 31px; font-weight: 600; line-height: 1.25; color: var(--dark-900); }
+.showcase-desc { font-size: 16px; color: var(--light-700); line-height: 1.6; }
+.showcase-list { display: flex; flex-direction: column; gap: 8px; }
+.showcase-list-item { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--dark-500); }
+.check-icon { width: 20px; height: 20px; border-radius: 50%; background: #e6faf0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+
+/* ── Stats ── */
+.stats-bar { background: var(--dark-900); padding: 48px 64px; }
+.stats-bar-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.stat { text-align: center; }
+.stat-value { font-size: 45px; font-weight: 600; color: #fff; line-height: 1.1; }
+.stat-value span { color: var(--papaya-500); }
+.stat-label { font-size: 14px; color: var(--light-700); margin-top: 6px; }
+
+/* ── Logos marquee ── */
+.logos-section { padding: 48px 64px; border-top: 1px solid var(--light-400); border-bottom: 1px solid var(--light-400); }
+.logos-label { text-align: center; font-size: 13px; color: var(--light-700); margin-bottom: 24px; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+.logos-row { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.logo-placeholder { height: 24px; background: var(--light-400); border-radius: 3px; opacity: .5; }
+
+/* ── Pricing ── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pricing-card { border: 1px solid var(--light-400); border-radius: var(--radius); padding: 32px; position: relative; }
+.pricing-card.featured { border-color: var(--papaya-500); border-width: 2px; }
+.pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--papaya-500); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: .04em; white-space: nowrap; }
+.pricing-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.pricing-desc { font-size: 13px; color: var(--light-700); margin-bottom: 20px; }
+.pricing-price { font-size: 45px; font-weight: 600; line-height: 1; margin-bottom: 4px; }
+.pricing-price sub { font-size: 16px; font-weight: 400; color: var(--light-700); vertical-align: baseline; }
+.pricing-period { font-size: 13px; color: var(--light-700); margin-bottom: 24px; }
+.pricing-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.pricing-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--dark-500); }
+
+/* ── CTA Banner ── */
+.cta-banner { background: var(--dark-900); padding: 80px 64px; text-align: center; }
+.cta-title { font-size: 45px; font-weight: 600; color: #fff; margin-bottom: 16px; }
+.cta-title span { color: var(--papaya-500); }
+.cta-sub { font-size: 18px; color: var(--light-700); margin-bottom: 32px; }
+.cta-actions { display: flex; justify-content: center; gap: 12px; }
+
+/* ── Footer ── */
+.footer { background: var(--dark-900); padding: 48px 64px 32px; border-top: 1px solid #262626; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 40px; }
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
+.footer-logo img { height: 20px; filter: brightness(0) invert(1); opacity: .8; }
+.footer-tagline { font-size: 13px; color: var(--light-700); line-height: 1.6; max-width: 280px; }
+.footer-socials { display: flex; gap: 10px; }
+.social-btn { width: 32px; height: 32px; border-radius: var(--radius); background: #262626; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .12s; }
+.social-btn:hover { background: #363636; }
+.footer-col-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--light-700); margin-bottom: 14px; }
+.footer-link { font-size: 14px; color: #686868; margin-bottom: 8px; cursor: pointer; transition: color .1s; display: block; }
+.footer-link:hover { color: #fff; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid #262626; max-width: 1200px; margin: 0 auto; }
+.footer-copy { font-size: 12px; color: #686868; }
+
+/* ── Page switcher ── */
+.page-switcher { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #fff; border-radius: 40px; box-shadow: var(--shadow-200); display: flex; padding: 4px; gap: 4px; z-index: 200; border: 1px solid var(--light-400); }
+.ps-btn { font-family: var(--font); font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 30px; border: none; cursor: pointer; background: transparent; color: var(--light-700); transition: background .12s, color .12s; }
+.ps-btn.active { background: var(--dark-900); color: #fff; }
+
+/* ── Robotics page specific ── */
+.dark-hero { background: var(--dark-900); padding: 100px 64px 80px; }
+.dark-hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.dark-hero-title { font-size: 52px; font-weight: 600; line-height: 1.1; color: #fff; margin-bottom: 20px; }
+.dark-hero-title span { color: var(--papaya-500); }
+.dark-hero-sub { font-size: 18px; color: var(--light-700); line-height: 1.6; margin-bottom: 32px; }
+.dark-visual { background: #1a1a1a; border-radius: 8px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; border: 1px solid #262626; overflow: hidden; }
+.grid-overlay { width: 100%; height: 100%; background-image: linear-gradient(rgba(236,78,11,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(236,78,11,.08) 1px, transparent 1px); background-size: 32px 32px; display: flex; align-items: center; justify-content: center; }
+.robot-shape { width: 80px; height: 80px; border: 2px solid var(--papaya-500); border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 32px rgba(236,78,11,.3); }
+.dark-section { padding: 80px 64px; max-width: 1200px; margin: 0 auto; }
+.dark-feature-card { padding: 28px; border: 1px solid #262626; border-radius: var(--radius); background: #1a1a1a; }
+.dark-feature-card:hover { border-color: #363636; }
+.dark-feature-title { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+.dark-feature-desc { font-size: 14px; color: var(--light-700); line-height: 1.6; }
+.tag { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.tag-orange { background: rgba(236,78,11,.15); color: var(--papaya-500); }
+.tag-dark { background: #262626; color: var(--light-700); }
+</style>
+</head>
+<body>
+
+<!-- Page switcher -->
+<div class="page-switcher">
+  <button class="ps-btn active" onclick="switchPage('home')">3D Platform</button>
+  <button class="ps-btn" onclick="switchPage('robotics')">Physical AI</button>
+  <button class="ps-btn" onclick="switchPage('pricing')">Pricing</button>
+</div>
+
+<!-- ════════════════════════════ HOME PAGE ═════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Nav -->
+  <nav class="site-nav">
+    <a class="site-nav-logo" onclick="switchPage('home')" style="cursor:pointer">
+      <img src="../../assets/logo-horizontal-light.png" alt="imagine.io">
+    </a>
+    <div class="site-nav-links">
+      <span class="site-nav-link active">Products</span>
+      <span class="site-nav-link" onclick="switchPage('robotics')">Physical AI</span>
+      <span class="site-nav-link">Enterprise</span>
+      <span class="site-nav-link" onclick="switchPage('pricing')">Pricing</span>
+      <span class="site-nav-link">Docs</span>
+    </div>
+    <div class="site-nav-right">
+      <button class="btn btn-ghost btn-sm">Log in</button>
+      <button class="btn btn-primary btn-sm">Start free trial</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section style="border-bottom:1px solid var(--light-400)">
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          3D content at scale
+        </div>
+        <h1 class="hero-title">Photorealistic 3D,<br><span>no expertise needed</span></h1>
+        <p class="hero-sub">Create stunning 3D product imagery for furniture, textiles, and home goods — without any engineering or 3D design background.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Start free trial</button>
+          <button class="btn btn-outline">Watch demo</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-inner">
+          <div class="hero-3d-block">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div style="display:flex;gap:8px">
+            ${['Sofa','Table','Chair','Lamp'].map((n,i) => `<div style="width:52px;height:52px;background:hsl(${i*40+20},30%,${70-i*8}%);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(0,0,0,.4);font-weight:500">${n}</div>`).join('')}
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span style="font-size:13px;font-weight:500;color:var(--dark-900)">8 renders generated</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo bar -->
+  <div class="logos-section">
+    <div class="logos-label">Trusted by leading manufacturers and retailers</div>
+    <div class="logos-row">
+      ${[90,110,80,130,95,70].map(w => `<div class="logo-placeholder" style="width:${w}px"></div>`).join('')}
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">Platform capabilities</div>
+        <h2 class="section-title">Everything you need to go from product to pixel</h2>
+        <p class="section-sub">One platform to upload, configure, render, and distribute photorealistic 3D content across all channels.</p>
+      </div>
+      <div class="feature-grid">
+        ${[
+          {icon:'⬡',title:'3D Configurator',desc:'Let customers explore every material, colour, and finish in real time. No downloads required.'},
+          {icon:'◈',title:'Curator',desc:'Generate lifestyle and silo imagery from your 3D assets. Set the scene, hit render.'},
+          {icon:'⚡',title:'Automation',desc:'Process thousands of SKUs automatically. Bulk upload, bulk render, bulk export.'},
+          {icon:'◻',title:'Asset library',desc:'Store, organise, and share all your 3D files, renders, and templates in one place.'},
+          {icon:'◇',title:'AR-ready output',desc:'Every asset exports in USDZ and GLB — ready for AR placement on iOS and Android.'},
+          {icon:'↗',title:'API & integrations',desc:'Push renders directly to your PIM, DAM, or e-commerce platform via REST API.'},
+        ].map(f => `
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="feature-title">${f.title}</div>
+          <div class="feature-desc">${f.desc}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat"><div class="stat-value">10<span>×</span></div><div class="stat-label">Faster than traditional 3D</div></div>
+      <div class="stat"><div class="stat-value">500<span>K+</span></div><div class="stat-label">Renders generated</div></div>
+      <div class="stat"><div class="stat-value">98<span>%</span></div><div class="stat-label">Customer satisfaction</div></div>
+      <div class="stat"><div class="stat-value">80<span>%</span></div><div class="stat-label">Cost reduction vs studio</div></div>
+    </div>
+  </div>
+
+  <!-- Showcase 1 -->
+  <section>
+    <div class="section">
+      <div class="showcase">
+        <div>
+          <div class="section-eyebrow">Curator</div>
+          <h2 class="showcase-title">Generate lifestyle renders in minutes</h2>
+          <p class="showcase-desc" style="margin-bottom:20px">Choose from hundreds of curated room templates. Drop in your product, adjust lighting, and export production-ready imagery — no photographer needed.</p>
+          <div class="showcase-list">
+            ${['Select template and scene','Place your 3D product','Adjust lighting and angle','Export JPG, PNG, WebP'].map(t => `
+            <div class="showcase-list-item">
+              <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+              ${t}
+            </div>`).join('')}
+          </div>
+          <button class="btn btn-primary" style="margin-top:24px">Try Curator</button>
+        </div>
+        <div class="showcase-visual" style="background:linear-gradient(135deg,#fdf1eb,#f9c8b3)">
+          <div style="width:80%;height:80%;background:rgba(255,255,255,.5);border-radius:6px;display:flex;align-items:center;justify-content:center">
+            <div style="width:60px;height:60px;background:linear-gradient(135deg,#f0713c,#822b06);border-radius:8px;box-shadow:0 12px 32px rgba(236,78,11,.3)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2 class="cta-title">Ready to <span>transform</span> your product imagery?</h2>
+    <p class="cta-sub">Join hundreds of manufacturers already using imagine.io to scale their visual content.</p>
+    <div class="cta-actions">
+      <button class="btn btn-primary">Start free trial</button>
+      <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.3)">Talk to sales</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="../../assets/logo-horizontal-dark.png" alt="imagine.io"></div>
+        <p class="footer-tagline">Photorealistic 3D content creation and physical AI simulation for the modern enterprise.</p>
+        <div class="footer-socials">
+          <div class="social-btn"><img src="../../assets/icons/linkedin.svg" width="14" height="14" style="filter:brightness(0) invert(1);opacity:.6"></div>
+          <div class="social-btn"><img src="../../assets/icons/instagram.svg" width="14" height="14" style="filter:brightness(0) invert(1);opacity:.6"></div>
+          <div class="social-btn"><img src="../../assets/icons/discord.svg" width="14" height="14" style="filter:brightness(0) invert(1);opacity:.6"></div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <a class="footer-link">3D Configurator</a>
+        <a class="footer-link">Curator</a>
+        <a class="footer-link">Automation</a>
+        <a class="footer-link">Physical AI</a>
+        <a class="footer-link">API</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <a class="footer-link">About</a>
+        <a class="footer-link">Careers</a>
+        <a class="footer-link">Blog</a>
+        <a class="footer-link">Press</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <a class="footer-link">Documentation</a>
+        <a class="footer-link">Changelog</a>
+        <a class="footer-link">Status</a>
+        <a class="footer-link">Support</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 imagine.io. All rights reserved.</span>
+      <div style="display:flex;gap:16px">
+        <a class="footer-link" style="margin:0;font-size:12px">Privacy</a>
+        <a class="footer-link" style="margin:0;font-size:12px">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ════════════════════════════ PHYSICAL AI PAGE ═════════════════════════════ -->
+<div class="page" id="page-robotics" style="background:var(--dark-900)">
+
+  <nav class="site-nav" style="background:var(--dark-900);border-bottom-color:#262626">
+    <a class="site-nav-logo" onclick="switchPage('home')" style="cursor:pointer">
+      <img src="../../assets/logo-horizontal-dark.png" alt="imagine.io">
+    </a>
+    <div class="site-nav-links">
+      <span class="site-nav-link" onclick="switchPage('home')">3D Platform</span>
+      <span class="site-nav-link active" style="color:#fff">Physical AI</span>
+      <span class="site-nav-link">NVIDIA Isaac Sim</span>
+      <span class="site-nav-link" onclick="switchPage('pricing')">Pricing</span>
+      <span class="site-nav-link">Docs</span>
+    </div>
+    <div class="site-nav-right">
+      <button class="btn btn-ghost btn-sm" style="color:var(--light-700)">Log in</button>
+      <button class="btn btn-primary btn-sm">Request access</button>
+    </div>
+  </nav>
+
+  <div class="dark-hero">
+    <div class="dark-hero-inner">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#1a1a1a;border:1px solid #363636;border-radius:4px;padding:5px 12px;margin-bottom:20px">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--papaya-500)"></div>
+          <span style="font-size:11px;font-weight:600;color:var(--light-700);text-transform:uppercase;letter-spacing:.08em">Physical AI Platform</span>
+        </div>
+        <h1 class="dark-hero-title">Train robots in<br>physics-accurate <span>3D worlds</span></h1>
+        <p class="dark-hero-sub">Physics-accurate simulation environments and asset libraries for robotics AI training. Built for NVIDIA Isaac Sim.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Request early access</button>
+          <button class="btn btn-outline" style="color:#fff;border-color:#363636">Read the docs</button>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+          <span class="tag tag-orange">NVIDIA Isaac Sim</span>
+          <span class="tag tag-dark">Physics-accurate</span>
+          <span class="tag tag-dark">Photorealistic</span>
+        </div>
+      </div>
+      <div class="dark-visual">
+        <div class="grid-overlay">
+          <div class="robot-shape">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ec4e0b" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/><line x1="12" y1="13" x2="12" y2="17"/><circle cx="12" cy="13" r="1" fill="#ec4e0b"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--dark-900);padding:80px 0">
+    <div class="dark-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Simulation infrastructure</div>
+        <h2 class="section-title" style="color:#fff">Built for the demands of Physical AI</h2>
+        <p class="section-sub" style="color:var(--light-700)">From digital twins to synthetic data generation — imagine.io provides the 3D infrastructure that robotics teams need to move faster.</p>
+      </div>
+      <div class="feature-grid">
+        ${[
+          {title:'Physics-accurate scenes',desc:'Every object, surface, and interaction in our simulation environments follows real-world physics constraints.'},
+          {title:'Photorealistic rendering',desc:'Generate synthetic training data that is visually indistinguishable from real camera captures.'},
+          {title:'Massive asset library',desc:'Thousands of 3D-scanned real-world objects, materials, and environments ready to use in Isaac Sim.'},
+          {title:'Domain randomization',desc:'Automatically vary lighting, textures, and poses to build robust, generalizable robot policies.'},
+          {title:'Isaac Sim native',desc:'Plug directly into NVIDIA Isaac Sim pipelines. No conversion, no friction, no workarounds.'},
+          {title:'Enterprise SLA',desc:'99.9% uptime, dedicated support, on-prem deployment options for regulated environments.'},
+        ].map(f => `
+        <div class="dark-feature-card">
+          <div style="width:36px;height:36px;border-radius:var(--radius);background:rgba(236,78,11,.12);display:flex;align-items:center;justify-content:center;margin-bottom:14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec4e0b" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="dark-feature-title">${f.title}</div>
+          <div class="dark-feature-desc">${f.desc}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-banner" style="background:#0f0f0f;border-top:1px solid #1a1a1a">
+    <h2 class="cta-title">The simulation layer for <span>Physical AI</span></h2>
+    <p class="cta-sub">Join robotics teams at leading AI labs and enterprises using imagine.io for synthetic training data.</p>
+    <div class="cta-actions">
+      <button class="btn btn-primary">Request early access</button>
+      <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.2)">Schedule a demo</button>
+    </div>
+  </div>
+
+  <footer class="footer" style="background:#0f0f0f;border-top-color:#1a1a1a">
+    <div class="footer-bottom" style="padding-top:0;border-top:none">
+      <span class="footer-copy">© 2025 imagine.io. All rights reserved.</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ════════════════════════════ PRICING PAGE ════════════════════════════ -->
+<div class="page" id="page-pricing">
+
+  <nav class="site-nav">
+    <a class="site-nav-logo" onclick="switchPage('home')" style="cursor:pointer">
+      <img src="../../assets/logo-horizontal-light.png" alt="imagine.io">
+    </a>
+    <div class="site-nav-links">
+      <span class="site-nav-link" onclick="switchPage('home')">Platform</span>
+      <span class="site-nav-link" onclick="switchPage('robotics')">Physical AI</span>
+      <span class="site-nav-link active">Pricing</span>
+      <span class="site-nav-link">Enterprise</span>
+    </div>
+    <div class="site-nav-right">
+      <button class="btn btn-ghost btn-sm">Log in</button>
+      <button class="btn btn-primary btn-sm">Start free trial</button>
+    </div>
+  </nav>
+
+  <div style="padding:64px 64px 0;text-align:center">
+    <div class="section-eyebrow" style="text-align:center">Pricing</div>
+    <h1 style="font-size:45px;font-weight:600;margin-bottom:12px">Simple, transparent pricing</h1>
+    <p style="font-size:18px;color:var(--light-700);margin-bottom:48px">Start free. Scale as you grow. No hidden fees.</p>
+  </div>
+
+  <div style="padding:0 64px 80px;max-width:1200px;margin:0 auto">
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-desc">For individuals and small teams</div>
+        <div class="pricing-price">$0<sub>/mo</sub></div>
+        <div class="pricing-period">Free forever</div>
+        <div class="pricing-list">
+          ${['50 renders/month','5 products','1 user','Community support'].map(i => `
+          <div class="pricing-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            ${i}
+          </div>`).join('')}
+        </div>
+        <button class="btn btn-outline" style="width:100%">Get started free</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-name">Business</div>
+        <div class="pricing-desc">For growing brands and agencies</div>
+        <div class="pricing-price" style="color:var(--papaya-500)">$299<sub>/mo</sub></div>
+        <div class="pricing-period">Billed monthly</div>
+        <div class="pricing-list">
+          ${['500 renders/month','Unlimited products','5 users','Priority support','API access','Custom templates'].map(i => `
+          <div class="pricing-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            ${i}
+          </div>`).join('')}
+        </div>
+        <button class="btn btn-primary" style="width:100%">Start free trial</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-desc">For large organisations at scale</div>
+        <div class="pricing-price" style="font-size:37px">Custom</div>
+        <div class="pricing-period">Volume pricing available</div>
+        <div class="pricing-list">
+          ${['Unlimited renders','Unlimited users','SSO & SAML','Dedicated CSM','SLA guarantee','On-prem option'].map(i => `
+          <div class="pricing-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            ${i}
+          </div>`).join('')}
+        </div>
+        <button class="btn btn-dark" style="width:100%">Talk to sales</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom" style="padding-top:0;border-top:none;max-width:1200px;margin:0 auto">
+      <span class="footer-copy">© 2025 imagine.io. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+function switchPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.ps-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['home','robotics','pricing'][i] === id);
+  });
+  window.scrollTo({ top: 0 });
+  localStorage.setItem('prism-website-page', id);
+}
+const saved = localStorage.getItem('prism-website-page');
+if (saved) switchPage(saved);
+</script>
+</body>
+</html>
