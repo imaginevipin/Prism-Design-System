@@ -1,0 +1,9 @@
+{
+  "name": "imagineio-design-system",
+  "version": "1.0.0",
+  "description": "imagine.io design system skill — brand guidelines, color tokens, typography, fonts, logos, and UI components for building imagine.io interfaces.",
+  "author": {
+    "name": "imagine.io"
+  },
+  "repository": "https://github.com/imaginevipin/Prism-Design-System"
+}
